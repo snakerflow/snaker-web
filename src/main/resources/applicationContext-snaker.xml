@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="true">
+
+	<description>SnakerEngine配置 </description>
+	<bean class="org.snaker.engine.spring.SpringSnakerEngine">
+		<property name="processService" ref="processService"/>
+		<property name="orderService" ref="orderService"/>
+		<property name="taskService" ref="taskService"/>
+		<property name="queryService" ref="queryService"/>
+		<property name="managerService" ref="managerService"/>
+	</bean>
+	
+	<bean id="dbAccess" class="org.snaker.engine.access.hibernate.Hibernate3Access">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="processService" class="org.snaker.engine.core.ProcessService">
+		<property name="access" ref="dbAccess"/>
+		<property name="cacheManager" ref="cacheManager"/>
+	</bean>
+	<bean id="orderService" class="org.snaker.engine.core.OrderService">
+		<property name="access" ref="dbAccess"/>
+	</bean>
+	<bean id="taskService" class="org.snaker.engine.core.TaskService">
+		<property name="access" ref="dbAccess"/>
+	</bean>
+	<bean id="managerService" class="org.snaker.engine.core.ManagerService">
+		<property name="access" ref="dbAccess"/>
+	</bean>
+	<bean id="queryService" class="org.snaker.engine.core.QueryService">
+		<property name="access" ref="dbAccess"/>
+	</bean>
+	
+	<bean id="cacheManager" class="org.snaker.engine.cache.memory.MemoryCacheManager"/>
+	<!-- spring jdbc access
+	<bean id="dbAccess" class="org.snaker.engine.access.spring.SpringJdbcAccess">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="lobHandler" ref="lobHandler"/>
+	</bean>
+	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true" />
+	 -->
+</beans>

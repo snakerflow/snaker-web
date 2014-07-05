@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>属性设置</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../../styles/css/style.css" type="text/css" media="all" />
+    <script src="../../styles/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../styles/js/snaker/snaker.form.js" type="text/javascript"></script>
+</head>
+<body>
+<script type="text/javascript" src="../../styles/ueditor/dialogs/internal.js"></script>
+
+<table class="table_all" align="center" border="0" cellpadding="0"
+       cellspacing="0" style="margin-top: 0px">
+    <tr>
+        <td class="td_table_1">
+            <span>表：</span>
+        </td>
+        <td class="td_table_2" colspan="3">
+            <select class="input_select" id="dbTable" onchange="dbField(this.options[this.options.selectedIndex].value)">
+                <option value="">--------请选择--------</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="td_table_1">
+            <span>绑定字段：</span>
+        </td>
+        <td class="td_table_2" colspan="3">
+            <select class="input_select" id="dbField">
+                <option value="">--------请选择--------</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="td_table_1">
+            <span>字典：</span>
+        </td>
+        <td class="td_table_2" colspan="3">
+            <select class="input_select" id="dictionary" name="dictionary">
+                <option value="">--------请选择--------</option>
+            </select>
+        </td>
+    </tr>
+</table>
+<script type="text/javascript">
+    dialog.onok = function (){
+        var dbTable = $("#dbTable").val();
+        var dbField = $("#dbField").val();
+        var dict = $('#dictionary').val();
+        var html = "<input type='radio' id='" + dbField + "' name='" + dbTable + "_" + dbField + "' ";
+        if(dict) {
+            html += " dict='" + dict + "' ";
+        }
+        html += "/>";
+        editor.execCommand("inserthtml", html);
+    }
+
+    dbTable();
+    dictionary("dictionary");
+</script>
+</body>
+</body>
+</html>
