@@ -1114,12 +1114,12 @@
 		if(hr.rects.length||ar.rects.length){
 			var pmap = {}, rmap = {};
 			for(var h in _paths){
-				if(!rmap[_paths[h].from().text()]){
-					rmap[_paths[h].from().text()]={rect:_paths[h].from(),paths:{}}
+				if(!rmap[_paths[h].from().getName()]){
+					rmap[_paths[h].from().getName()]={rect:_paths[h].from(),paths:{}}
 				}
-				rmap[_paths[h].from().text()].paths[_paths[h].text()]=_paths[h];
-				if(!rmap[_paths[h].to().text()]){
-					rmap[_paths[h].to().text()]={rect:_paths[h].to(),paths:{}}
+				rmap[_paths[h].from().getName()].paths[_paths[h].text()]=_paths[h];
+				if(!rmap[_paths[h].to().getName()]){
+					rmap[_paths[h].to().getName()]={rect:_paths[h].to(),paths:{}}
 				}
 			}
 			for(var u=0;u<hr.rects.length;u++){
