@@ -1,6 +1,7 @@
 package org.snaker.modules.base.web;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -15,6 +16,9 @@ import org.snaker.engine.entity.Task;
 import org.snaker.engine.entity.WorkItem;
 import org.snaker.engine.model.TaskModel.TaskType;
 import org.snaker.engine.model.WorkModel;
+import org.snaker.framework.form.entity.DbTable;
+import org.snaker.framework.form.entity.Form;
+import org.snaker.framework.form.service.FormDataManager;
 import org.snaker.framework.form.service.FormManager;
 import org.snaker.framework.security.shiro.ShiroUtils;
 import org.snaker.modules.base.service.SnakerEngineFacets;
@@ -37,6 +41,8 @@ public class SnakerController {
 	private SnakerEngineFacets facets;
     @Autowired
     private FormManager formManager;
+    @Autowired
+    private FormDataManager formDataManager;
 	
 	@RequestMapping(value = "task/active", method=RequestMethod.GET)
 	public String homeTaskList(Model model) {
@@ -265,7 +271,18 @@ public class SnakerController {
 		if(!"cc".equalsIgnoreCase(type)) {
 			model.addAttribute("current", currentTaskName);
 		}
-        model.addAttribute("forms", formManager.getAll());
+        for(WorkModel wm : models) {
+            String formUrl = wm.getForm();
+            if(StringUtils.isNotEmpty(formUrl) && formUrl.startsWith("forms/")) {
+                String formName = formUrl.substring(6, formUrl.length() - 5);
+                Form form = formManager.get(formName);
+                if(form != null && StringUtils.isNotEmpty(orderId)) {
+                    Map<String, Object> formData = formDataManager.get(form.getTables(), orderId);
+                    System.out.println("formdata====>" + formData);
+                    model.addAttribute("formData", formData);
+                }
+            }
+        }
 		model.addAttribute("works", models);
 		model.addAttribute("process", process);
 		model.addAttribute("operator", ShiroUtils.getUsername());

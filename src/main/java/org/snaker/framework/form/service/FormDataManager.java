@@ -18,6 +18,8 @@
 package org.snaker.framework.form.service;
 
 import org.apache.commons.lang.StringUtils;
+import org.snaker.engine.entity.Order;
+import org.snaker.engine.helper.DateHelper;
 import org.snaker.engine.helper.StringHelper;
 import org.snaker.framework.form.dao.FormDataDao;
 import org.snaker.framework.form.entity.DbTable;
@@ -30,10 +32,7 @@ import org.snaker.modules.base.service.SnakerEngineFacets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 动态表单的数据管理
@@ -47,21 +46,53 @@ public class FormDataManager {
     @Autowired
     private SnakerEngineFacets facets;
     public void save(FormData formData) {
-        List<SqlData> sqlDatas = getSqlDatas(formData);
-        formDataDao.save(sqlDatas);
         if(StringUtils.isNotEmpty(formData.getProcessId())) {
             if(StringUtils.isNotEmpty(formData.getOrderId()) && StringUtils.isNotEmpty(formData.getTaskId())) {
                 facets.execute(formData.getTaskId(), ShiroUtils.getUsername(), null);
             } else {
-                facets.startAndExecute(formData.getProcessId(), ShiroUtils.getUsername(), null);
+                Order order = facets.startAndExecute(formData.getProcessId(), ShiroUtils.getUsername(), null);
+                formData.setOrderId(order.getId());
             }
         }
+        List<SqlData> sqlDatas = getInsertSQLs(formData);
+        formDataDao.save(sqlDatas);
     }
 
-    private List<SqlData> getSqlDatas(FormData formData) {
+    public Map<String, Object> get(List<DbTable> tables, String orderId) {
+        List<SqlData> sqlDatas = new ArrayList<SqlData>();
+        for(DbTable table : tables) {
+            SqlData sqlData = getQuerySQLs(table, orderId);
+            sqlDatas.add(sqlData);
+        }
+        return formDataDao.get(sqlDatas);
+    }
+
+    private SqlData getQuerySQLs(DbTable table, String orderId) {
+        SqlData sqlData = new SqlData(table);
+        StringBuilder builder = new StringBuilder();
+        builder.append("SELECT ");
+        for(Field field : table.getFields()) {
+            String uiName = table.getName() + "_" + field.getName();
+            builder.append(field.getName());
+            builder.append(" AS ");
+            builder.append(uiName);
+            builder.append(", ");
+        }
+        builder.append(" OPERATOR AS ").append(table.getName()).append("_").append("OPERATOR, ");
+        builder.append(" OPERATETIME AS ").append(table.getName()).append("_").append("OPERATETIME, ");
+        builder.append(" ORDERID AS ").append(table.getName()).append("_").append("ORDERID ");
+        builder.append(" FROM T_");
+        builder.append(table.getName());
+        builder.append(" WHERE ORDERID = ? ORDER BY OPERATETIME DESC");
+        sqlData.setSql(builder.toString());
+        sqlData.setValues(new Object[]{orderId});
+        return sqlData;
+    }
+
+    private List<SqlData> getInsertSQLs(FormData formData) {
         List<SqlData> sqlDatas = new ArrayList<SqlData>();
         Map<DbTable, Map<String, String>> fieldData = formData.getFieldData();
-        Map<DbTable, Map<String, String[]>> subFieldData = formData.getSubFieldData();
+        //Map<DbTable, Map<String, String[]>> subFieldData = formData.getSubFieldData();
         for(Map.Entry<DbTable, Map<String, String>> entry : fieldData.entrySet()) {
             DbTable table = entry.getKey();
             Map<String, String> data = entry.getValue();
@@ -70,6 +101,9 @@ public class FormDataManager {
             StringBuilder fieldNames = new StringBuilder();
             StringBuilder params = new StringBuilder();
             List values = new ArrayList();
+            values.add(formData.getOrderId());
+            values.add(DateHelper.getTime());
+            values.add(ShiroUtils.getUsername());
             for(Field field : table.getFields()) {
                 Object dbValue = getDbValue(formData, data.get(field.getName()), field);
                 fieldNames.append(field.getName()).append(",");
@@ -78,12 +112,12 @@ public class FormDataManager {
             }
             sql.append(" INSERT INTO T_");
             sql.append(table.getName());
-            sql.append(" (ID, ");
+            sql.append(" (ID, ORDERID, OPERATETIME, OPERATOR, ");
             sql.append(fieldNames.substring(0, fieldNames.length() - 1));
             sql.append(")");
             sql.append(" VALUES ('");
             sql.append(StringHelper.getPrimaryKey());
-            sql.append("', ");
+            sql.append("', ?, ?, ?, ");
             sql.append(params.substring(0, params.length() - 1));
             sql.append(")");
             sqlData.setSql(sql.toString());

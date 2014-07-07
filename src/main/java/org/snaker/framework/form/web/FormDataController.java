@@ -54,7 +54,11 @@ public class FormDataController {
         try {
             formDataManager.save(formData);
         } catch(Exception e) {
-            model.addAttribute("error", formData.getError());
+            //model.addAttribute("error", formData.getError());
+            model.addAttribute("processId", formData.getProcessId());
+            model.addAttribute("orderId", formData.getOrderId());
+            model.addAttribute("taskId", formData.getTaskId());
+            return "redirect:/snaker/all";
         }
         return "redirect:/snaker/task/active";
     }

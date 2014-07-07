@@ -73,7 +73,7 @@ public class SnakerEngineFacets {
 		return engine.startInstanceByName(name, version, operator, args);
 	}
 	
-	public List<Task> startAndExecute(String name, Integer version, String operator, Map<String, Object> args) {
+	public Order startAndExecute(String name, Integer version, String operator, Map<String, Object> args) {
 		Order order = engine.startInstanceByName(name, version, operator, args);
 		List<Task> tasks = engine.query().getActiveTasks(new QueryFilter().setOrderId(order.getId()));
 		List<Task> newTasks = new ArrayList<Task>();
@@ -81,10 +81,10 @@ public class SnakerEngineFacets {
 			Task task = tasks.get(0);
 			newTasks.addAll(engine.executeTask(task.getId(), operator, args));
 		}
-		return newTasks;
+		return order;
 	}
 	
-	public List<Task> startAndExecute(String processId, String operator, Map<String, Object> args) {
+	public Order startAndExecute(String processId, String operator, Map<String, Object> args) {
 		Order order = engine.startInstanceById(processId, operator, args);
 		List<Task> tasks = engine.query().getActiveTasks(new QueryFilter().setOrderId(order.getId()));
 		List<Task> newTasks = new ArrayList<Task>();
@@ -92,7 +92,7 @@ public class SnakerEngineFacets {
 			Task task = tasks.get(0);
 			newTasks.addAll(engine.executeTask(task.getId(), operator, args));
 		}
-		return newTasks;
+		return order;
 	}
 	
 	public List<Task> execute(String taskId, String operator, Map<String, Object> args) {

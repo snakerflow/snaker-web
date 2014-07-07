@@ -88,6 +88,15 @@ public class FormManager {
     }
 
     /**
+     * 根据name获取实体
+     * @param name
+     * @return
+     */
+    public Form get(String name) {
+        return formDao.findUniqueBy("name", name);
+    }
+
+    /**
      * 根据分页对象、过滤集合参数，分页查询列表
      * @param page
      * @param filters

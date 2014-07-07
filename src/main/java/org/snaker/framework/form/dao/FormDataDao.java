@@ -22,7 +22,9 @@ import org.slf4j.LoggerFactory;
 import org.snaker.framework.form.entity.SqlData;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 表单数据的操作类
@@ -38,5 +40,15 @@ public class FormDataDao extends JdbcDaoSupport {
             Object[] values = sqlData.getValues();
             getJdbcTemplate().update(sql, values);
         }
+    }
+
+    public Map<String, Object> get(List<SqlData> sqlDatas) {
+        Map<String, Object> formData = new HashMap<String, Object>();
+        for(SqlData sqlData : sqlDatas) {
+            String sql = sqlData.getSql();
+            log.info("sql=" + sql);
+            formData.putAll(getJdbcTemplate().queryForMap(sql, sqlData.getValues()));
+        }
+        return formData;
     }
 }
