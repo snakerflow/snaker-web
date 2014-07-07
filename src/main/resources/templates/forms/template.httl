@@ -1,7 +1,9 @@
 #set(org.snaker.framework.form.entity.Form form)
+#set(org.snaker.framework.form.entity.DbTable table)
 #[#set(org.snaker.engine.entity.Process process)
 #set(org.snaker.engine.entity.Order order)
 #set(org.snaker.engine.entity.Task task)
+<!--#var(Map<String, Object> formData)-->
 <form id="inputForm" action="${contextPath }/form/data/save" method="post" enctype="multipart/form-data">
     <input type="hidden" name="processId" value="${process.id }" />
     <input type="hidden" name="orderId" value="${order.id }" />
