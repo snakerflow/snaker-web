@@ -6,5 +6,8 @@ CREATE TABLE T_${dbtable.name} (
 <!--#foreach(field in dbtable.fields)-->
     ${field.name}${blank}<!--#if(field.type == '1')-->VARCHAR<!--#if(field.dataLength > 0)-->(${field.dataLength})<!--#end--><!--#elseif(field.type == '2')--><!--#if(field.dataLength < 5)-->SMALLINT<!--#else-->BIGINT(${field.dataLength})<!--#end--><!--#elseif(field.type == '3')-->DOUBLE<!--#if(field.dataLength > 0 && field.dataDigit > 0)-->(${field.dataLength},${field.dataDigit})<!--#end--><!--#elseif(field.type == '4')-->DATETIME<!--#elseif(field.type == '5')-->TEXT<!--#else-->VARCHAR<!--#end-->${blank}<!--#if(field.required == '1')-->NOT${blank}<!--#end-->NULL,
 <!--#end-->
-    ID  VARCHAR(32) NOT NULL PRIMARY KEY
+    ID  VARCHAR(32) NOT NULL PRIMARY KEY,
+    OPERATETIME  VARCHAR(20),
+    OPERATOR     VARCHAR(50),
+    ORDERID      VARCHAR(32)
 );
