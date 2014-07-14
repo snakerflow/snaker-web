@@ -21,6 +21,7 @@ import org.snaker.framework.form.entity.DbTable;
 import org.snaker.framework.form.entity.Form;
 import org.snaker.framework.form.service.DbTableManager;
 import org.snaker.framework.form.service.FormManager;
+import org.snaker.framework.form.service.HtmlProcessor;
 import org.snaker.framework.orm.Page;
 import org.snaker.framework.orm.PropertyFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import java.util.List;
 
 /**
@@ -47,6 +49,8 @@ public class FormController {
     private FormManager formManager;
     @Autowired
     private DbTableManager dbTableManager;
+    @Autowired
+    private HtmlProcessor htmlProcessor;
 
     /**
      * 分页查询，返回列表视图
@@ -102,8 +106,13 @@ public class FormController {
     @ResponseBody
     public String designerSave(Long id, String html, HttpSession session) {
         Form form = formManager.get(id);
-        form.setHtml(html);
-        String templatePath = session.getServletContext().getRealPath("/") + "/WEB-INF/templates/flow/forms/";
+        String newHtml = htmlProcessor.processHtml(html);
+        newHtml = newHtml.replaceAll("selvalue=\"", "");
+        newHtml = newHtml.replaceAll("##\"", "");
+        form.setHtml(newHtml);
+        System.out.println(form.getHtml());
+        String templatePath = session.getServletContext().getRealPath("/") 
+        		+ "/WEB-INF/templates/flow/forms/";
         formManager.save(form, templatePath);
         return "success";
     }

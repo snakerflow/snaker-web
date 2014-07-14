@@ -82,7 +82,7 @@
         if(maxLength) {
             html += " maxLength='" + maxLength + "' ";
         }
-        html += "/></textarea>";
+        html += "/>${formData[\"" + dbTable + "_" + dbField + "\"]}</textarea>";
         editor.execCommand("inserthtml", html);
     }
     dbTable();

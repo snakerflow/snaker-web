@@ -45,6 +45,11 @@ public class FormDataManager {
     private FormDataDao formDataDao;
     @Autowired
     private SnakerEngineFacets facets;
+
+    /**
+     * 保存动态表单数据
+     * @param formData
+     */
     public void save(FormData formData) {
         if(StringUtils.isNotEmpty(formData.getProcessId())) {
             if(StringUtils.isNotEmpty(formData.getOrderId()) && StringUtils.isNotEmpty(formData.getTaskId())) {
@@ -58,6 +63,12 @@ public class FormDataManager {
         formDataDao.save(sqlDatas);
     }
 
+    /**
+     * 根据表集合，流程实例ID获取数据
+     * @param tables 表集合
+     * @param orderId 流程实例ID
+     * @return
+     */
     public Map<String, Object> get(List<DbTable> tables, String orderId) {
         List<SqlData> sqlDatas = new ArrayList<SqlData>();
         for(DbTable table : tables) {
@@ -67,6 +78,12 @@ public class FormDataManager {
         return formDataDao.get(sqlDatas);
     }
 
+    /**
+     * 获取查询SQL
+     * @param table 表对象
+     * @param orderId 流程实例ID
+     * @return
+     */
     private SqlData getQuerySQLs(DbTable table, String orderId) {
         SqlData sqlData = new SqlData(table);
         StringBuilder builder = new StringBuilder();
@@ -89,6 +106,11 @@ public class FormDataManager {
         return sqlData;
     }
 
+    /**
+     * 根据动态表单数据构造INSERT的SQL语句
+     * @param formData 表单数据
+     * @return
+     */
     private List<SqlData> getInsertSQLs(FormData formData) {
         List<SqlData> sqlDatas = new ArrayList<SqlData>();
         Map<DbTable, Map<String, String>> fieldData = formData.getFieldData();
@@ -128,6 +150,13 @@ public class FormDataManager {
         return sqlDatas;
     }
 
+    /**
+     * 类型转换
+     * @param formData 表单数据对象
+     * @param uiValue ui传递的值
+     * @param field 字段对象
+     * @return
+     */
     private Object getDbValue(FormData formData, String uiValue, Field field) {
         Object dbValue = null;
         String type = field.getType();

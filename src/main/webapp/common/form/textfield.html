@@ -68,7 +68,7 @@
         var dbField = $("#dbField").val();
         var width = $("#width").val();
         var validator = $('input[name="validator"]:checked').val();
-        var html = "<input type='text' id='" + dbField + "' name='" + dbTable + "_" + dbField + "'";
+        var html = "<input type='text' id='" + dbField + "' name='" + dbTable + "_" + dbField + "' value='${formData[\"" + dbTable + "_" + dbField + "\"]}'";
         if(width) {
             html += " style='width:" + width + "px' ";
         } else {

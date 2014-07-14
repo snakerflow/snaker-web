@@ -3,7 +3,6 @@
 #set(org.snaker.engine.entity.Order order)
 #set(org.snaker.engine.entity.Task task)
 #set(org.snaker.engine.model.TaskModel taskModel = item)
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">
 	<head>
 		<title>${process.displayName }</title>
@@ -57,6 +56,7 @@
 			<!--#if(item.form)-->
 			${include(item.form, ["active": (item.name == current ? '1' : '0')])}
             <!--#elseif(taskModel.fields)-->
+            ${include('dynamic.html', ["active": (item.name == current ? '1' : '0'), "fields": taskModel.fields])}
             <!--#end-->
 		</div>
 		<!--#end-->

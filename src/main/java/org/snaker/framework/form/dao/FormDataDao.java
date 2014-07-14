@@ -47,7 +47,13 @@ public class FormDataDao extends JdbcDaoSupport {
         for(SqlData sqlData : sqlDatas) {
             String sql = sqlData.getSql();
             log.info("sql=" + sql);
-            formData.putAll(getJdbcTemplate().queryForMap(sql, sqlData.getValues()));
+            try {
+            	Map<String, Object> datas = getJdbcTemplate().queryForMap(sql, sqlData.getValues());
+            	formData.putAll(datas);
+            } catch(Exception e) {
+            	e.printStackTrace();
+            	log.error(e.getMessage());
+            }
         }
         return formData;
     }

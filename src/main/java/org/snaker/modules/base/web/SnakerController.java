@@ -1,5 +1,6 @@
 package org.snaker.modules.base.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,6 @@ import org.snaker.engine.entity.Task;
 import org.snaker.engine.entity.WorkItem;
 import org.snaker.engine.model.TaskModel.TaskType;
 import org.snaker.engine.model.WorkModel;
-import org.snaker.framework.form.entity.DbTable;
 import org.snaker.framework.form.entity.Form;
 import org.snaker.framework.form.service.FormDataManager;
 import org.snaker.framework.form.service.FormManager;
@@ -271,6 +271,7 @@ public class SnakerController {
 		if(!"cc".equalsIgnoreCase(type)) {
 			model.addAttribute("current", currentTaskName);
 		}
+		Map<String, Object> formDatas = new HashMap<String, Object>();
         for(WorkModel wm : models) {
             String formUrl = wm.getForm();
             if(StringUtils.isNotEmpty(formUrl) && formUrl.startsWith("forms/")) {
@@ -279,10 +280,11 @@ public class SnakerController {
                 if(form != null && StringUtils.isNotEmpty(orderId)) {
                     Map<String, Object> formData = formDataManager.get(form.getTables(), orderId);
                     System.out.println("formdata====>" + formData);
-                    model.addAttribute("formData", formData);
+                    formDatas.putAll(formData);
                 }
             }
         }
+        model.addAttribute("formData", formDatas);
 		model.addAttribute("works", models);
 		model.addAttribute("process", process);
 		model.addAttribute("operator", ShiroUtils.getUsername());
