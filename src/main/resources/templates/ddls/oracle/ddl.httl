@@ -1,0 +1,13 @@
+#set(org.snaker.framework.form.entity.DbTable dbtable)
+#set(org.snaker.framework.form.entity.Field field)
+#set(blank=" ")
+DROP TABLE IF EXISTS T_${dbtable.name};
+CREATE TABLE T_${dbtable.name} (
+<!--#foreach(field in dbtable.fields)-->
+    ${field.name}${blank}<!--#if(field.type == '1')-->VARCHAR2<!--#if(field.dataLength > 0)-->(${field.dataLength})<!--#end--><!--#elseif(field.type == '2')-->NUMBER<!--#if(field.dataLength > 0)-->(${field.dataLength})<!--#end--><!--#elseif(field.type == '3')-->NUMBER<!--#if(field.dataLength > 0 && field.dataDigit > 0)-->(${field.dataLength},${field.dataDigit})<!--#end--><!--#elseif(field.type == '4')-->date<!--#elseif(field.type == '5')-->VARCHAR2<!--#else-->VARCHAR2<!--#end-->${blank}<!--#if(field.required == '1')-->NOT${blank}<!--#end-->NULL,
+<!--#end-->
+    ID  VARCHAR2(32) NOT NULL PRIMARY KEY,
+    OPERATETIME  VARCHAR2(20),
+    OPERATOR     VARCHAR2(50),
+    ORDERID      VARCHAR2(32)
+);
