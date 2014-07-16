@@ -16,6 +16,7 @@ package org.snaker.modules.base.web;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,8 +136,12 @@ public class ProcessController {
 		Process process = facets.getEngine().process().getProcessById(id);
 		model.addAttribute("process", process);
 		if(process.getDBContent() != null) {
-			model.addAttribute("content", StringHelper.textXML(new String(process.getDBContent())));
-		}
+            try {
+                model.addAttribute("content", StringHelper.textXML(new String(process.getDBContent(), "UTF-8")));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
 		return "snaker/processEdit";
 	}
 	

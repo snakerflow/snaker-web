@@ -60,7 +60,7 @@ public class SnakerHelper {
 		buffer.append("{'activeRects':{'rects':[");
 		for(Task task : tasks) {
 			buffer.append("{'paths':[],'name':'");
-			buffer.append(task.getDisplayName());
+			buffer.append(task.getTaskName());
 			buffer.append("'},");
 		}
 		buffer.deleteCharAt(buffer.length() - 1);
