@@ -56,7 +56,7 @@
 			<!--#if(item.form)-->
 			${include(item.form, ["active": (item.name == current ? '1' : '0')])}
             <!--#elseif(taskModel.fields)-->
-            ${include('dynamic.html', ["active": (item.name == current ? '1' : '0'), "fields": taskModel.fields])}
+
             <!--#end-->
 		</div>
 		<!--#end-->

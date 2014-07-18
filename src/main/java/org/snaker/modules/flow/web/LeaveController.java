@@ -39,7 +39,7 @@ public class LeaveController {
 	 */
 	@RequestMapping(value = "apply/save" ,method=RequestMethod.POST)
 	public String applySave(@RequestParam(value = "applyFile") MultipartFile applyFile, Model model, 
-			String processId, HttpServletRequest request, float day) {
+			String processId, String orderId, String taskId, HttpServletRequest request, float day) {
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("day", day);
 		args.put("reason", request.getParameter("reason"));
@@ -67,7 +67,11 @@ public class LeaveController {
 				args.put("applyFilePath", filePath + applyFileName);
 			}
 		}
-		facets.startAndExecute(processId, ShiroUtils.getUsername(), args);
+        if(StringUtils.isEmpty(orderId) && StringUtils.isEmpty(taskId)) {
+		    facets.startAndExecute(processId, ShiroUtils.getUsername(), args);
+        } else {
+            facets.execute(taskId, ShiroUtils.getUsername(), args);
+        }
 		return "redirect:/snaker/task/active";
 	}
 	
