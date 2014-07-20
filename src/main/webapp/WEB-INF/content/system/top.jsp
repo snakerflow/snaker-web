@@ -21,7 +21,7 @@
 <div id="admin-nav-wrap">
   <div class="admin-nav">
     <ul>
-      <li><a href="http://snakerflow.github.io/" target="_blank">官网首页</a></li>
+      <li><a href="http://snakerflow.com/" target="_blank">官网首页</a></li>
     </ul>
   </div>
 </div>

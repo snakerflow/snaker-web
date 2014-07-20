@@ -108,14 +108,18 @@ public class LeaveController {
 	
 	/**
 	 * 总经理审批保存
-	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "approveBoss/save" ,method=RequestMethod.POST)
-	public String approveBossSave(Model model, HttpServletRequest request) {
+	public String approveBossSave(String taskId, HttpServletRequest request) {
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("approveBoss.suggest", request.getParameter("approveBoss.suggest"));
-		facets.execute(request.getParameter("taskId"), ShiroUtils.getUsername(), args);
+        String bossResult = request.getParameter("bossResult");
+        if(bossResult.equals("-1")) {
+            facets.executeAndJump(taskId, ShiroUtils.getUsername(), args, null);
+        } else {
+            facets.execute(taskId, ShiroUtils.getUsername(), args);
+        }
 		return "redirect:/snaker/task/active";
 	}
 }

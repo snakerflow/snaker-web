@@ -4,7 +4,9 @@
 		editable:true,
 		lineHeight:15,
 		basePath:"",
+        ctxPath:"",
         formPath:"",
+        orderId:"",
 		rect:{
 			attr:{
 				x:10,y:10,width:100,height:50,r:5,fill:"90-#fff-#C0C0C0",stroke:"#000","stroke-width":1
@@ -142,6 +144,37 @@
                 x : x3,
                 y : y3
             }];
+        },
+
+        tip : function(rect, name) {
+            var tipDIV = document.getElementById("tipDIV");
+            if (tipDIV) {
+                document.body.removeChild(tipDIV);
+            }
+            tipDIV = document.createElement("tipDIV");
+            tipDIV.id = "tipDIV";
+            tipDIV.style.styleFloat="left";
+            tipDIV.style.overflow="hidden";
+            tipDIV.style.left=document.getElementById('snakerflow').offsetLeft+rect.attr('x');
+            tipDIV.style.top=document.getElementById('snakerflow').offsetTop+rect.attr('y')+52;
+            tipDIV.style.width=180;
+            tipDIV.style.height=60;
+            tipDIV.style.position="absolute";
+            tipDIV.style.backgroundColor="#FFE699";
+            $.ajax({
+                type:'GET',
+                url:designer.config.ctxPath+"/snaker/task/tip",
+                data:"orderId=" + designer.config.orderId + "&taskName=" + name,//_o.props['name'].value,
+                async: false,
+                error: function(){
+                    alert('数据处理错误！');
+                    return false;
+                },
+                success: function(data){
+                    tipDIV.innerHTML="<div style='width:180px; height:20px;border: 1px solid #d2dde2;'><a href='javascript:void(0)' onclick='addTaskActor(\"" + name + "\");' class='btnAdd'></a><a href='javascript:void(0)' class='btnClock'></a></div><div style='width:180px; height:40px;border: 1px solid #d2dde2;'><div id='currentActorDIV' style='width:180px; height:20px;'>参与者:" + data.actors + "</div><div id='arrivalDIV' style='width:180px; height:20px;'>抵达时间:" + data.createTime + "</div></div>";
+                    document.body.appendChild(tipDIV);
+                }
+            });
         }
     }
 	designer.rect=function(o, r){
@@ -176,12 +209,24 @@
         }, function() {
             dragUp();
         });
+        _text.click(function(){
+            if (!designer.config.editable) {
+                designer.util.tip(_rect, _o.props['name'].value);
+            }
+        });
+        _rect.click(function(){
+            if (!designer.config.editable) {
+                designer.util.tip(_rect, _o.props['name'].value);
+            }
+        });
         _rect.dblclick(function(){
-            var returnValue = window.showModalDialog('/form/form?lookup=1',window,'dialogWidth:1000px;dialogHeight:600px');
-            if(returnValue) {
-                var formPath = designer.config.formPath + returnValue + ".html";
-                _o.props.form.value = formPath;
-                document.getElementById("pform").innerHTML = '<input style="width:98%;" value="' + formPath + '"/>';
+            if (designer.config.editable) {
+                var returnValue = window.showModalDialog(designer.config.ctxPath + '/form/form?lookup=1',window,'dialogWidth:1000px;dialogHeight:600px');
+                if(returnValue) {
+                    var formPath = designer.config.formPath + returnValue + ".html";
+                    _o.props.form.value = formPath;
+                    document.getElementById("pform").innerHTML = '<input style="width:98%;" value="' + formPath + '"/>';
+                }
             }
         });
         _img.drag(function(dx, dy) {

@@ -328,6 +328,17 @@ a.btnDel {
 	margin-right: 3px;
 }
 
+a.btnAdd {
+    background:url(../images/add.png) no-repeat;
+    display:block;
+    width:22px;
+    height:20px;
+    text-indent:-1000px;
+    overflow:hidden;
+    float:left;
+    margin-right: 3px;
+}
+
 a.btnEdit {
 	background:url(../images/edit.png) no-repeat; 
 	display:block; 
@@ -450,6 +461,17 @@ a.btnRead {
 	overflow:hidden; 
 	float:left; 
 	margin-right: 3px;
+}
+
+a.btnClock {
+    background:url(../images/clock.png) no-repeat;
+    display:block;
+    width:22px;
+    height:20px;
+    text-indent:-1000px;
+    overflow:hidden;
+    float:left;
+    margin-right: 3px;
 }
 
 #switchpic {

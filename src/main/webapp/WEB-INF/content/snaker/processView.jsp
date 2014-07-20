@@ -16,10 +16,19 @@
 		<script src="${ctx}/styles/js/snaker/snaker.editors.js" type="text/javascript"></script>
 
 <script type="text/javascript">
+    function addTaskActor(taskName) {
+        var url = '${ctx}/snaker/task/actor/add?orderId=${order.id}&taskName=' + taskName;
+        var returnValue = window.showModalDialog(url,window,'dialogWidth:1000px;dialogHeight:600px');
+        if(returnValue) {
+            $('#currentActorDIV').append(',' + returnValue);
+        }
+    }
 	function display(process, active) {
 		/** view*/
 		$('#snakerflow').snakerflow($.extend(true,{
 			basePath : "${ctx}/styles/js/snaker/",
+            ctxPath : "${ctx}",
+            orderId : "${order.id}",
 			restore : eval("(" + process + ")")
 			,
 			editable : false

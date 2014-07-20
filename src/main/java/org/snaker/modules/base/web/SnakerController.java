@@ -15,6 +15,7 @@ import org.snaker.engine.entity.Order;
 import org.snaker.engine.entity.Process;
 import org.snaker.engine.entity.Task;
 import org.snaker.engine.entity.WorkItem;
+import org.snaker.engine.model.TaskModel;
 import org.snaker.engine.model.TaskModel.TaskType;
 import org.snaker.engine.model.WorkModel;
 import org.snaker.framework.form.entity.Form;
@@ -27,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Snaker流程引擎常用Controller
@@ -92,6 +94,49 @@ public class SnakerController {
 		model.addAttribute("page", page);
 		return "snaker/userTask";
 	}
+
+    @RequestMapping(value = "task/actor/add", method=RequestMethod.GET)
+    public String addTaskActor(Model model, String orderId, String taskName) {
+        model.addAttribute("orderId", orderId);
+        model.addAttribute("taskName", taskName);
+        return "snaker/actor";
+    }
+
+    @RequestMapping(value = "task/actor/add", method=RequestMethod.POST)
+    @ResponseBody
+    public String addTaskActor(Model model, String orderId, String taskName, String operator) {
+        List<Task> tasks = facets.getEngine().query().getActiveTasks(new QueryFilter().setOrderId(orderId));
+        for(Task task : tasks) {
+            if(task.getTaskName().equalsIgnoreCase(taskName) && StringUtils.isNotEmpty(operator)) {
+                facets.getEngine().task().addTaskActor(task.getId(), operator);
+            }
+        }
+        return "success";
+    }
+
+    @RequestMapping(value = "task/tip", method=RequestMethod.GET)
+    @ResponseBody
+    public Map<String, String> addTaskActor(String orderId, String taskName) {
+        List<Task> tasks = facets.getEngine().query().getActiveTasks(new QueryFilter().setOrderId(orderId));
+        StringBuilder builder = new StringBuilder();
+        String createTime = "";
+        for(Task task : tasks) {
+            if(task.getTaskName().equalsIgnoreCase(taskName)) {
+                String[] actors = facets.getEngine().query().getTaskActorsByTaskId(task.getId());
+                for(String actor : actors) {
+                    builder.append(actor).append(",");
+                }
+                createTime = task.getCreateTime();
+            }
+        }
+        if(builder.length() > 0) {
+            builder.deleteCharAt(builder.length() - 1);
+        }
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("actors", builder.toString());
+        data.put("createTime", createTime);
+        return data;
+    }
 	
 	/**
 	 * 活动任务查询列表
