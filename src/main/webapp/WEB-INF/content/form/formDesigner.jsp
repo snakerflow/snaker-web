@@ -27,7 +27,7 @@
         <script id="editor" type="text/plain" style="width:98%;height:500px;">${form.html}</script>
     </div>
     <script type="text/javascript">
-        var formData = { hasEditor: "0", id:"${form.id}" };
+        var formData = { hasEditor: "0", id:"${form.id}", ctx:"${ctx}" };
         var ue = UE.getEditor('editor');
     </script>
 	</body>

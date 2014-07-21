@@ -1,7 +1,7 @@
 function dbTable() {
     $.ajax({
         type:"GET",
-        url: "/form/form/tables?formId=" + parent.formData.id,
+        url: parent.formData.ctx + "/form/form/tables?formId=" + parent.formData.id,
         success:function(data){
             var selectElement = document.getElementById("dbTable");
             for(var i=0;i<data.length;i++) {
@@ -14,7 +14,7 @@ function dbTable() {
 function dbField(tableName) {
     $.ajax({
         type:"GET",
-        url: "/form/dbtable/fields?table=" + tableName,
+        url: parent.formData.ctx + "/form/dbtable/fields?table=" + tableName,
         success:function(data){
             var selectElement = document.getElementById("dbField");
             selectElement.options.length = 1;
@@ -27,7 +27,7 @@ function dbField(tableName) {
 function dict(element, config) {
     $.ajax({
         type:"GET",
-        url: "/config/dictionary/items?config=" + config,
+        url: parent.formData.ctx + "/config/dictionary/items?config=" + config,
         success:function(data){
             var selectElement = document.getElementById(element);
             for(var i=0;i<data.length;i++) {
@@ -40,7 +40,7 @@ function dict(element, config) {
 function dictionary(element) {
     $.ajax({
         type:"GET",
-        url: "/config/dictionary/dicts",
+        url: parent.formData.ctx + "/config/dictionary/dicts",
         success:function(data){
             var selectElement = document.getElementById(element);
             for(var i=0;i<data.length;i++) {

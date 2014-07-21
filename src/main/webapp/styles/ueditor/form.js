@@ -2,7 +2,7 @@ UE.registerUI('textfieldDialog', function(editor, uiName) {
     //创建dialog
     var dialog = new UE.ui.Dialog({
         //指定弹出层中页面的路径，这里只能支持页面,因为跟addCustomizeDialog.js相同目录，所以无需加路径
-        iframeUrl:'/common/form/textfield.html',
+        iframeUrl:formData.ctx + '/common/form/textfield.html',
         //需要指定当前的编辑器实例
         editor:editor,
         //指定dialog的名字
@@ -50,7 +50,7 @@ UE.registerUI('dateDialog', function(editor, uiName) {
     //创建dialog
     var dialog = new UE.ui.Dialog({
         //指定弹出层中页面的路径，这里只能支持页面,因为跟addCustomizeDialog.js相同目录，所以无需加路径
-        iframeUrl:'/common/form/date.html',
+        iframeUrl:formData.ctx + '/common/form/date.html',
         //需要指定当前的编辑器实例
         editor:editor,
         //指定dialog的名字
@@ -98,7 +98,7 @@ UE.registerUI('checkDialog', function(editor, uiName) {
     //创建dialog
     var dialog = new UE.ui.Dialog({
         //指定弹出层中页面的路径，这里只能支持页面,因为跟addCustomizeDialog.js相同目录，所以无需加路径
-        iframeUrl:'/common/form/check.html',
+        iframeUrl:formData.ctx + '/common/form/check.html',
         //需要指定当前的编辑器实例
         editor:editor,
         //指定dialog的名字
@@ -146,7 +146,7 @@ UE.registerUI('radioDialog', function(editor, uiName) {
     //创建dialog
     var dialog = new UE.ui.Dialog({
         //指定弹出层中页面的路径，这里只能支持页面,因为跟addCustomizeDialog.js相同目录，所以无需加路径
-        iframeUrl:'/common/form/radio.html',
+        iframeUrl:formData.ctx + '/common/form/radio.html',
         //需要指定当前的编辑器实例
         editor:editor,
         //指定dialog的名字
@@ -194,7 +194,7 @@ UE.registerUI('selectDialog', function(editor, uiName) {
     //创建dialog
     var dialog = new UE.ui.Dialog({
         //指定弹出层中页面的路径，这里只能支持页面,因为跟addCustomizeDialog.js相同目录，所以无需加路径
-        iframeUrl:'/common/form/select.html',
+        iframeUrl:formData.ctx + '/common/form/select.html',
         //需要指定当前的编辑器实例
         editor:editor,
         //指定dialog的名字
@@ -242,7 +242,7 @@ UE.registerUI('textareaDialog', function(editor, uiName) {
     //创建dialog
     var dialog = new UE.ui.Dialog({
         //指定弹出层中页面的路径，这里只能支持页面,因为跟addCustomizeDialog.js相同目录，所以无需加路径
-        iframeUrl:'/common/form/textarea.html',
+        iframeUrl:formData.ctx + '/common/form/textarea.html',
         //需要指定当前的编辑器实例
         editor:editor,
         //指定dialog的名字
@@ -290,7 +290,7 @@ UE.registerUI('attachmentDialog', function(editor, uiName) {
     //创建dialog
     var dialog = new UE.ui.Dialog({
         //指定弹出层中页面的路径，这里只能支持页面,因为跟addCustomizeDialog.js相同目录，所以无需加路径
-        iframeUrl:'/common/form/attachment.html',
+        iframeUrl:formData.ctx + '/common/form/attachment.html',
         //需要指定当前的编辑器实例
         editor:editor,
         //指定dialog的名字
@@ -338,7 +338,7 @@ UE.registerUI('editorDialog', function(editor, uiName) {
     //创建dialog
     var dialog = new UE.ui.Dialog({
         //指定弹出层中页面的路径，这里只能支持页面,因为跟addCustomizeDialog.js相同目录，所以无需加路径
-        iframeUrl:'/common/form/editor.html',
+        iframeUrl:formData.ctx + '/common/form/editor.html',
         //需要指定当前的编辑器实例
         editor:editor,
         //指定dialog的名字
@@ -436,7 +436,7 @@ UE.registerUI('userDialog', function(editor, uiName) {
     //创建dialog
     var dialog = new UE.ui.Dialog({
         //指定弹出层中页面的路径，这里只能支持页面,因为跟addCustomizeDialog.js相同目录，所以无需加路径
-        iframeUrl:'/common/form/user.html',
+        iframeUrl:formData.ctx + '/common/form/user.html',
         //需要指定当前的编辑器实例
         editor:editor,
         //指定dialog的名字
@@ -484,7 +484,7 @@ UE.registerUI('departmentDialog', function(editor, uiName) {
     //创建dialog
     var dialog = new UE.ui.Dialog({
         //指定弹出层中页面的路径，这里只能支持页面,因为跟addCustomizeDialog.js相同目录，所以无需加路径
-        iframeUrl:'/common/form/department.html',
+        iframeUrl:formData.ctx + '/common/form/department.html',
         //需要指定当前的编辑器实例
         editor:editor,
         //指定dialog的名字
@@ -568,7 +568,7 @@ UE.registerUI('saveBtn', function(editor, uiName) {
 function saveForm(id, html) {
     $.ajax({
         type:'POST',
-        url:"/form/form/designer/save",
+        url:formData.ctx + "/form/form/designer/save",
         data: {
             id: id,
             html: html
