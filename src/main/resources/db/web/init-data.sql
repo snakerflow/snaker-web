@@ -1,4 +1,3 @@
-//菜单表初始化数据
 INSERT INTO sec_menu (ID, DESCRIPTION, NAME, PARENT_MENU, ORDERBY) VALUES (1, '', '流程管理', NULL, 1);
 INSERT INTO sec_menu (ID, DESCRIPTION, NAME, PARENT_MENU, ORDERBY) VALUES (2, '', '功能模块', NULL, 2);
 INSERT INTO sec_menu (ID, DESCRIPTION, NAME, PARENT_MENU, ORDERBY) VALUES (3, '', '配置管理', NULL, 3);
@@ -21,7 +20,6 @@ INSERT INTO sec_menu (ID, DESCRIPTION, NAME, PARENT_MENU, ORDERBY) VALUES (44, '
 INSERT INTO sec_menu (ID, DESCRIPTION, NAME, PARENT_MENU, ORDERBY) VALUES (45, '', '资源管理', 4, 5);
 INSERT INTO sec_menu (ID, DESCRIPTION, NAME, PARENT_MENU, ORDERBY) VALUES (46, '', '菜单管理', 4, 6);
 
-//资源表初始化数据
 INSERT INTO sec_resource (ID, NAME, SOURCE, MENU) VALUES (101, '待办任务', '/snaker/task/active', 11);
 INSERT INTO sec_resource (ID, NAME, SOURCE, MENU) VALUES (102, '流程实例', '/snaker/order', 12);
 INSERT INTO sec_resource (ID, NAME, SOURCE, MENU) VALUES (103, '历史任务', '/snaker/task/history', 13);
@@ -67,7 +65,6 @@ INSERT INTO sec_resource (ID, NAME, SOURCE, MENU) VALUES (434, '权限编辑', '
 INSERT INTO sec_resource (ID, NAME, SOURCE, MENU) VALUES (435, '资源编辑', '/security/resource/update/**;/security/resource/create/**', NULL);
 INSERT INTO sec_resource (ID, NAME, SOURCE, MENU) VALUES (436, '菜单编辑', '/security/menu/update/**;/security/menu/create/**', NULL);
 
-//权限表初始化数据
 INSERT INTO sec_authority (ID, DESCRIPTION, NAME) VALUES (101, '待办任务', 'ACTIVETASK');
 INSERT INTO sec_authority (ID, DESCRIPTION, NAME) VALUES (102, '流程实例', 'ORDER');
 INSERT INTO sec_authority (ID, DESCRIPTION, NAME) VALUES (103, '历史任务', 'HISTORYTASK');
@@ -113,7 +110,6 @@ INSERT INTO sec_authority (ID, DESCRIPTION, NAME) VALUES (434, '权限编辑', '
 INSERT INTO sec_authority (ID, DESCRIPTION, NAME) VALUES (435, '资源编辑', 'RESOURCEEDIT');
 INSERT INTO sec_authority (ID, DESCRIPTION, NAME) VALUES (436, '菜单编辑', 'MENUEDIT');
 
-//权限资源关联表初始化数据
 INSERT INTO sec_authority_resource (AUTHORITY_ID, RESOURCE_ID) VALUES (101, 101);
 INSERT INTO sec_authority_resource (AUTHORITY_ID, RESOURCE_ID) VALUES (102, 102);
 INSERT INTO sec_authority_resource (AUTHORITY_ID, RESOURCE_ID) VALUES (103, 103);
@@ -239,7 +235,6 @@ INSERT INTO sec_org (ID, ACTIVE, DESCRIPTION, FULLNAME, NAME, TYPE, PARENT_ORG) 
 INSERT INTO sec_org (ID, ACTIVE, DESCRIPTION, FULLNAME, NAME, TYPE, PARENT_ORG) VALUES(200203, NULL, NULL, NULL, '需求组', NULL, 2002);
 INSERT INTO sec_org (ID, ACTIVE, DESCRIPTION, FULLNAME, NAME, TYPE, PARENT_ORG) VALUES(200204, NULL, NULL, NULL, 'UI组', NULL, 2002);
 
-//用户表初始化数据
 INSERT INTO sec_user (ID, ADDRESS, AGE, EMAIL, ENABLED, FULLNAME, PASSWORD, SEX, TYPE, USERNAME, ORG, SALT)
 VALUES (1, '', NULL, '', '1', '系统管理员', 'f9e1a0299c2570eb5942fbbda0b2a8ceb2ef9769', '1', NULL, 'admin', 200, 'e97e0cea2389225f');
 INSERT INTO sec_user (ID, ADDRESS, AGE, EMAIL, ENABLED, FULLNAME, PASSWORD, SEX, TYPE, USERNAME, ORG, SALT)
@@ -251,7 +246,6 @@ INSERT INTO sec_role_user (USER_ID, ROLE_ID) VALUES (1, 1);
 INSERT INTO sec_role_user (USER_ID, ROLE_ID) VALUES (2, 2);
 INSERT INTO sec_role_user (USER_ID, ROLE_ID) VALUES (3, 2);
 
-//数据字典表初始化数据
 INSERT INTO conf_dictionary (ID, DESCRIPTION, NAME, CN_NAME) VALUES (1, '', 'yesNo', '是否');
 INSERT INTO conf_dictionary (ID, DESCRIPTION, NAME, CN_NAME) VALUES (2, '', 'sex', '性别');
 INSERT INTO conf_dictionary (ID, DESCRIPTION, NAME, CN_NAME) VALUES (3, '', 'formType', '表单类型');

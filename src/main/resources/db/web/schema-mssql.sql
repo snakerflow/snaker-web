@@ -136,9 +136,11 @@ ALTER TABLE DF_TABLE ADD UNIQUE (NAME);
 CREATE TABLE DF_FORM (
   ID          numeric(19,0) NOT NULL PRIMARY KEY,
   NAME        varchar(100) not null,
+  DISPLAY_NAME varchar(200),
   TYPE        varchar(50),
   CREATOR     varchar(50),
-  CREATE_TIME varchar(50)
+  CREATE_TIME varchar(50),
+  HTML   text
 );
 ALTER TABLE DF_FORM ADD UNIQUE (NAME);
 
@@ -150,8 +152,11 @@ CREATE TABLE DF_FIELD (
   DEFAULT_VALUE varchar(200),
   DISPLAY_NAME varchar(200),
   NAME        varchar(100) NOT NULL,
-  IS_NEED     numeric(1,0),
+  required     varchar(10),
   TYPE        varchar(100),
   DB_TABLE    numeric(19,0) NOT NULL
 );
-ALTER TABLE DF_FIELD ADD UNIQUE (NAME);
+CREATE TABLE df_form_table (
+  form_id numeric(20,0) NOT NULL,
+  table_id numeric(20,0) NOT NULL
+);
