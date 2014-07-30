@@ -36,7 +36,7 @@ UE.registerUI('textfieldDialog', function(editor, uiName) {
         name:'dialogbutton' + uiName,
         title:'dialogbutton' + uiName,
         //需要添加的额外样式，指定icon图标，这里默认使用一个重复的icon
-        cssRules :'background: url(/styles/images/field/field_textfield.png) no-repeat 2px 3px!important;',
+        cssRules :'background: url(' + formData.ctx + '/styles/images/field/field_textfield.png) no-repeat 2px 3px!important;',
         onclick:function () {
             //渲染dialog
             dialog.render();
@@ -84,7 +84,7 @@ UE.registerUI('dateDialog', function(editor, uiName) {
         name:'dialogbutton' + uiName,
         title:'dialogbutton' + uiName,
         //需要添加的额外样式，指定icon图标，这里默认使用一个重复的icon
-        cssRules :'background: url(/styles/images/field/field_date.png) no-repeat 2px 3px!important;',
+        cssRules :'background: url(' + formData.ctx + '/styles/images/field/field_date.png) no-repeat 2px 3px!important;',
         onclick:function () {
             //渲染dialog
             dialog.render();
@@ -132,7 +132,7 @@ UE.registerUI('checkDialog', function(editor, uiName) {
         name:'dialogbutton' + uiName,
         title:'dialogbutton' + uiName,
         //需要添加的额外样式，指定icon图标，这里默认使用一个重复的icon
-        cssRules :'background: url(/styles/images/field/field_check.png) no-repeat 2px 3px!important;',
+        cssRules :'background: url(' + formData.ctx + '/styles/images/field/field_check.png) no-repeat 2px 3px!important;',
         onclick:function () {
             //渲染dialog
             dialog.render();
@@ -180,7 +180,7 @@ UE.registerUI('radioDialog', function(editor, uiName) {
         name:'dialogbutton' + uiName,
         title:'dialogbutton' + uiName,
         //需要添加的额外样式，指定icon图标，这里默认使用一个重复的icon
-        cssRules :'background: url(/styles/images/field/field_radio.png) no-repeat 2px 3px!important;',
+        cssRules :'background: url(' + formData.ctx + '/styles/images/field/field_radio.png) no-repeat 2px 3px!important;',
         onclick:function () {
             //渲染dialog
             dialog.render();
@@ -228,7 +228,7 @@ UE.registerUI('selectDialog', function(editor, uiName) {
         name:'dialogbutton' + uiName,
         title:'dialogbutton' + uiName,
         //需要添加的额外样式，指定icon图标，这里默认使用一个重复的icon
-        cssRules :'background: url(/styles/images/field/field_select.png) no-repeat 2px 3px!important;',
+        cssRules :'background: url(' + formData.ctx + '/styles/images/field/field_select.png) no-repeat 2px 3px!important;',
         onclick:function () {
             //渲染dialog
             dialog.render();
@@ -276,7 +276,7 @@ UE.registerUI('textareaDialog', function(editor, uiName) {
         name:'dialogbutton' + uiName,
         title:'dialogbutton' + uiName,
         //需要添加的额外样式，指定icon图标，这里默认使用一个重复的icon
-        cssRules :'background: url(/styles/images/field/field_textarea.gif) no-repeat 2px 3px!important;',
+        cssRules :'background: url(' + formData.ctx + '/styles/images/field/field_textarea.gif) no-repeat 2px 3px!important;',
         onclick:function () {
             //渲染dialog
             dialog.render();
@@ -324,7 +324,7 @@ UE.registerUI('attachmentDialog', function(editor, uiName) {
         name:'dialogbutton' + uiName,
         title:'dialogbutton' + uiName,
         //需要添加的额外样式，指定icon图标，这里默认使用一个重复的icon
-        cssRules :'background: url(/styles/images/field/field_attachment.gif) no-repeat 2px 3px!important;',
+        cssRules :'background: url(' + formData.ctx + '/styles/images/field/field_attachment.gif) no-repeat 2px 3px!important;',
         onclick:function () {
             //渲染dialog
             dialog.render();
@@ -372,7 +372,7 @@ UE.registerUI('editorDialog', function(editor, uiName) {
         name:'dialogbutton' + uiName,
         title:'dialogbutton' + uiName,
         //需要添加的额外样式，指定icon图标，这里默认使用一个重复的icon
-        cssRules :'background: url(/styles/images/field/field_editor.png) no-repeat 2px 3px!important;',
+        cssRules :'background: url(' + formData.ctx + '/styles/images/field/field_editor.png) no-repeat 2px 3px!important;',
         onclick:function () {
             //渲染dialog
             dialog.render();
@@ -470,7 +470,7 @@ UE.registerUI('userDialog', function(editor, uiName) {
         name:'dialogbutton' + uiName,
         title:'dialogbutton' + uiName,
         //需要添加的额外样式，指定icon图标，这里默认使用一个重复的icon
-        cssRules :'background: url(/styles/images/field/field_user.png) no-repeat 2px 3px!important;',
+        cssRules :'background: url(' + formData.ctx + '/styles/images/field/field_user.png) no-repeat 2px 3px!important;',
         onclick:function () {
             //渲染dialog
             dialog.render();
@@ -518,7 +518,7 @@ UE.registerUI('departmentDialog', function(editor, uiName) {
         name:'dialogbutton' + uiName,
         title:'dialogbutton' + uiName,
         //需要添加的额外样式，指定icon图标，这里默认使用一个重复的icon
-        cssRules :'background: url(/styles/images/field/field_department.png) no-repeat 2px 3px!important;',
+        cssRules :'background: url(' + formData.ctx + '/styles/images/field/field_department.png) no-repeat 2px 3px!important;',
         onclick:function () {
             //渲染dialog
             dialog.render();
@@ -543,7 +543,7 @@ UE.registerUI('saveBtn', function(editor, uiName) {
         //提示
         title: "保存表单",
         //添加额外样式，指定icon图标，这里默认使用一个重复的icon
-        cssRules: 'background: url(/styles/images/form/save.png) no-repeat 2px 3px!important;',
+        cssRules: 'background: url(' + formData.ctx + '/styles/images/form/save.png) no-repeat 2px 3px!important;',
         //点击时执行的命令
         onclick: function() {
             //这里可以不用执行命令,做你自己的操作也可
@@ -580,6 +580,7 @@ function saveForm(id, html) {
         },
         success: function(data){
             alert("保存成功");
+            window.location.href = formData.ctx + "/form/form";
         }
     });
 }
