@@ -731,7 +731,7 @@
                     p+="L"+d.pos().x+" "+d.pos().y
                 }
                 var arrPos = designer.util.arrow(d.left().pos(),d.pos(),_o.attr.arrow.radius);
-                arr="M"+arrPos[0].x+" "+arrPos[0].y+"L"+arrPos[1].x+" "+arrPos[1].y+"L"+arrPos[2].x+" "+arrPos[2].y+"_r";
+                arr="M"+arrPos[0].x+" "+arrPos[0].y+"L"+arrPos[1].x+" "+arrPos[1].y+"L"+arrPos[2].x+" "+arrPos[2].y+"z";
                 return[p,arr]
             };
             this.toJson=function(){
