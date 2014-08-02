@@ -2,10 +2,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.snakerflow</groupId>
     <artifactId>snaker-web</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>war</packaging>
     <properties>
-        <snaker.version>2.0.0</snaker.version>
+        <snaker.version>2.1.0</snaker.version>
         <spring.version>3.1.3.RELEASE</spring.version>
         <hibernate.version>3.5.5-Final</hibernate.version>
         <shiro.version>1.2.1</shiro.version>
