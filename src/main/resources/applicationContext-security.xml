@@ -19,7 +19,6 @@
 				/styles/** = anon
 				/common/** = anon
 				/index = authc
-				/** = user
 			</value>
 		</property>
 	</bean>
@@ -30,11 +29,13 @@
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
-	<bean id="dbRealm" class="org.snaker.framework.security.shiro.ShiroAuthorizingRealm"/>
+	<bean id="dbRealm" class="org.snaker.framework.security.shiro.ShiroAuthorizingRealm">
+        <property name="userManager" ref="userManager"/>
+    </bean>
 
-	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+<!--	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
 		<property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager" />
 		<property name="arguments" ref="securityManager" />
-	</bean>
+	</bean>-->
 
 </beans>

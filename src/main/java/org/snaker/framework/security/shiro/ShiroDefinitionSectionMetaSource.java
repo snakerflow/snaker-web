@@ -54,11 +54,12 @@ public class ShiroDefinitionSectionMetaSource implements FactoryBean<Ini.Section
 				}
 			}
 		}
+        section.put("/**", "user");
 		return section;
 	}
 	
 	private void putDefinitionSection(Section section, String key, String value) {
-	    log.debug("加载数据库权限：【key=" + key + "/tvalue=" + value + "】");
+	    log.info("加载数据库权限：【key=" + key + "\tvalue=" + value + "】");
 	    section.put(key, MessageFormat.format(PREMISSION_FORMAT, value));
 	}
 	

@@ -32,8 +32,12 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class ShiroAuthorizingRealm extends AuthorizingRealm {
 	private static Log log = LogFactory.getLog(ShiroAuthorizingRealm.class);
-	//注入用户管理对象
-	@Autowired
+
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
+    }
+
+    //注入用户管理对象
 	private UserManager userManager;
 	
 	/**
