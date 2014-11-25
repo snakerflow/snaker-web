@@ -64,7 +64,7 @@
 					</td>
 					<td class="td_list_2" align=left nowrap>
 						<a href="${ctx}/snaker/process/display?orderId=${item.orderId} " class="btnPict" title="查看流程图">查看流程图</a>
-						<a href="${ctx}/snaker/all?processId=${item.processId }&taskId=${item.taskId}&orderId=${item.orderId} " class="btnEdit" title="处理">处理</a>
+						<a href="${ctx}${empty item.instanceUrl ? item.actionUrl : item.instanceUrl }?processId=${item.processId }&taskId=${item.taskId}&orderId=${item.orderId} " class="btnEdit" title="处理">处理</a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -133,7 +133,7 @@
 					</td>
 					<td class="td_list_2" align=left nowrap>
 						<a href="${ctx}/snaker/process/display?orderId=${item.orderId} " class="btnPict" title="查看流程图">查看流程图</a>
-						<a href="${ctx}/snaker/all?processId=${item.processId }&taskId=${item.taskId}&orderId=${item.orderId} " class="btnEdit" title="处理">处理</a>
+						<a href="${ctx}${empty item.instanceUrl ? item.actionUrl : item.instanceUrl }?processId=${item.processId }&taskId=${item.taskId}&orderId=${item.orderId} " class="btnEdit" title="处理">处理</a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -201,7 +201,7 @@
 					</td>
 					<td class="td_list_2" align=left nowrap>
 						<a href="${ctx}/snaker/process/display?orderId=${item.id} " class="btnPict" title="查看流程图">查看流程图</a>
-						<a href="${ctx}/snaker/all?processId=${item.processId }&orderId=${item.id}&type=cc " class="btnView" title="查看">查看</a>
+						<a href="${ctx}${empty item.instanceUrl ? item.actionUrl : item.instanceUrl }?processId=${item.processId }&orderId=${item.id}&type=cc " class="btnView" title="查看">查看</a>
 						<a href="${ctx}/snaker/ccread?id=${item.id}&url=/snaker/task/active " class="btnRead" title="关闭">关闭</a>
 					</td>
 				</tr>

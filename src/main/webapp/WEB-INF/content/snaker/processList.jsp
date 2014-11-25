@@ -91,7 +91,7 @@
 						${process.version}&nbsp;
 					</td>					
 					<td class="td_list_2" align=left nowrap>
-						<a href="${ctx}/snaker/all?processId=${process.id }&processName=${process.name }" class="btnStart" title="启动流程">启动流程</a>
+						<a href="${ctx}${process.instanceUrl }?processId=${process.id }&processName=${process.name }" class="btnStart" title="启动流程">启动流程</a>
 						<shiro:hasPermission name="PROCESSDEPLOY">
 						<a href="${ctx}/snaker/process/edit/${process.id }" class="btnEdit" title="编辑">编辑</a>
 						<a href="${ctx}/snaker/process/designer?processId=${process.id }" class="btnDesigner" title="设计">设计</a>

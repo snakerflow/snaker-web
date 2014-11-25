@@ -11,7 +11,7 @@
 		<property name="filterChainDefinitionMap" ref="definitionMetaSource"/>
 	</bean>
 
-	<bean id="definitionMetaSource" class="org.snaker.framework.security.shiro.ShiroDefinitionSectionMetaSource">
+	<bean id="definitionMetaSource" class="com.snakerflow.framework.security.shiro.ShiroDefinitionSectionMetaSource">
 		<property name="filterChainDefinitions">
 			<value>
 				/login = anon
@@ -29,7 +29,7 @@
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
-	<bean id="dbRealm" class="org.snaker.framework.security.shiro.ShiroAuthorizingRealm">
+	<bean id="dbRealm" class="com.snakerflow.framework.security.shiro.ShiroAuthorizingRealm">
         <property name="userManager" ref="userManager"/>
     </bean>
 

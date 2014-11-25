@@ -64,7 +64,7 @@
 					</td>
 					<td class="td_list_2" align=left nowrap>
 						<a href="${ctx}/snaker/process/display?orderId=${item.orderId} " class="btnView" title="查看">查看</a>
-						<a href="${ctx}/snaker/all?processId=${item.processId }&taskId=${item.taskId}&orderId=${item.orderId} " class="btnEdit" title="处理">处理</a>
+						<a href="${ctx}${empty item.instanceUrl ? item.actionUrl : item.instanceUrl }?processId=${item.processId }&taskId=${item.taskId}&orderId=${item.orderId} " class="btnEdit" title="处理">处理</a>
 					</td>
 				</tr>
 			</c:forEach>

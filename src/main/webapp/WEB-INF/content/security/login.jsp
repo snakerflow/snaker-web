@@ -48,13 +48,13 @@
 					<div class="control-group">
 						<label class="control-label" for="username">账号：</label>
 						<div class="controls">
-							<input type="text" class="" id="username" name="username" value="" autocomplete="off"/>
+							<input type="text" class="" id="username" name="username" value="admin" autocomplete="off"/>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="password">密码：</label>
 						<div class="controls">
-							<input type="password" class="" id="password" name="password" value=""/>
+							<input type="password" class="" id="password" name="password" value="123456"/>
 						</div>
 					</div>
 				</fieldset>

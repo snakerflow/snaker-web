@@ -9,7 +9,7 @@
 	<uri></uri>
 	<tag>
 		<name>page</name>
-		<tagclass>org.snaker.modules.base.web.taglibs.PageTag</tagclass>
+		<tagclass>com.snakerflow.app.web.taglibs.PageTag</tagclass>
 		<attribute>
 			<name>totalRecords</name>
 			<required>true</required>
@@ -39,7 +39,7 @@
    	
 	<tag>
 		<name>select</name>
-		<tagclass>org.snaker.modules.base.web.taglibs.SelectTag</tagclass>
+		<tagclass>com.snakerflow.app.web.taglibs.SelectTag</tagclass>
 		<attribute>
 			<name>type</name>
 			<required>true</required>
@@ -89,6 +89,6 @@
    	
    	<tag>
    		<name>menu</name>
-   		<tagclass>org.snaker.modules.base.web.taglibs.MenuTag</tagclass>
+   		<tagclass>com.snakerflow.app.web.taglibs.MenuTag</tagclass>
    	</tag>
 </taglib>
