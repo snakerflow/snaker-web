@@ -1,0 +1,9 @@
+﻿html, body
+{
+	margin: 0px;
+	padding: 0px 0px 20px 0px;
+	font-family: Arial, Sans-Serif; /*font-size: 62.5%;*/
+	font-size: 12px;
+	height: 100%;
+	padding: 10px;
+}
