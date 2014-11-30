@@ -60,19 +60,19 @@
 		<table class="table_all" align="center" border="0" cellpadding="0"
 			cellspacing="0" style="margin-top: 0px">
 			<tr>
-				<td align=center width=30% class="td_list_1" nowrap>
+				<td align=center width=15% class="td_list_1" nowrap>
 					名称
 				</td>
-				<td align=center width=20% class="td_list_1" nowrap>
+				<td align=center width=35% class="td_list_1" nowrap>
 					流程显示名称
 				</td>
-				<td align=center width=30% class="td_list_1" nowrap>
+				<td align=center width=10% class="td_list_1" nowrap>
 					状态
 				</td>
-				<td align=center width=20% class="td_list_1" nowrap>
+				<td align=center width=10% class="td_list_1" nowrap>
 					版本号
 				</td>
-				<td align=center width=10% class="td_list_1" nowrap>
+				<td align=center width=30% class="td_list_1" nowrap>
 					操作
 				</td>				
 			</tr>

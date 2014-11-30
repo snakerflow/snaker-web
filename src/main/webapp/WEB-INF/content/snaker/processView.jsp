@@ -101,7 +101,7 @@
 		$.ajax({
 				type:'GET',
 				url:"${ctx}/snaker/process/json",
-				data:"orderId=${order.id}",
+				data:"processId=${processId}&orderId=${order.id}",
 				async: false,
 				globle:false,
 				error: function(){

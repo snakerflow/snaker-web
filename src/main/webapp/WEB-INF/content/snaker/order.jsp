@@ -74,7 +74,7 @@
 						${item.orderState == 0 ? '已结束' : '运行中'}&nbsp;
 					</td>
 					<td class="td_list_2" align=left nowrap>
-						<a href="${ctx}/snaker/process/display?orderId=${item.id} " class="btnPict" title="查看流程图">查看流程图</a>
+						<a href="${ctx}/snaker/process/display?processId=${item.processId }&orderId=${item.id} " class="btnPict" title="查看流程图">查看流程图</a>
 						<a href="${ctx}/snaker/all?processId=${item.processId }&orderId=${item.id}&type=cc " class="btnView" title="查看">查看</a>
 					</td>
 				</tr>

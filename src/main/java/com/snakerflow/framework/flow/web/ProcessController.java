@@ -246,7 +246,8 @@ public class ProcessController {
 	}
 	
 	@RequestMapping(value = "display", method=RequestMethod.GET)
-	public String display(Model model, String orderId) {
+	public String display(Model model, String processId, String orderId) {
+        model.addAttribute("processId", processId);
 		HistoryOrder order = facets.getEngine().query().getHistOrder(orderId);
 		model.addAttribute("order", order);
 		List<HistoryTask> tasks = facets.getEngine().query().getHistoryTasks(new QueryFilter().setOrderId(orderId));
