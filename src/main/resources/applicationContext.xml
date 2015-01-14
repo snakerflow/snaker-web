@@ -62,7 +62,7 @@
 			<list>
 			    <value>com.snakerflow.framework.security.entity</value>
                 <value>com.snakerflow.framework.flow.entity</value>
-                <value>com.snakerflow.framework.dictionary.entity</value>
+                <value>com.snakerflow.framework.config.entity</value>
                 <value>com.snakerflow.app.modules.entity</value>
 			</list>
 		</property>
@@ -77,6 +77,10 @@
 				<value>hbm/snaker.surrogate.hbm.xml</value>
 			</list>
 		</property> 
+	</bean>
+
+	<bean class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 
 	<!-- 事务管理器配置,单数据源事务 -->
@@ -111,7 +115,7 @@
 		</tx:attributes>
 	</tx:advice>
 	<!-- or execution(* org.snaker.framework.flow.service..*.*(..))
-	  
+
 	 -->
 	<aop:config>
 		<aop:advisor advice-ref="txAdvice" pointcut="execution(* org.snaker.engine.core..*.*(..))

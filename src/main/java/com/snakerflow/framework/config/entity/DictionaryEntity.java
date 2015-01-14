@@ -1,4 +1,4 @@
-package com.snakerflow.framework.dictionary.entity;
+package com.snakerflow.framework.config.entity;
 
 import java.io.Serializable;
 

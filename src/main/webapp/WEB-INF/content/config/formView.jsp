@@ -4,23 +4,36 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">
 	<head>
-		<title>表管理</title>
+		<title>表单管理</title>
 		<%@ include file="/common/meta.jsp"%>
 		<link rel="stylesheet" href="${ctx}/styles/css/style.css" type="text/css" media="all" />
-		<script src="${ctx}/styles/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+		<script type="text/javascript" charset="utf-8" src="${ctx }/styles/js/jquery-1.8.3.min.js"></script>
 	</head>
 
 	<body>
 		<form id="inputForm" action="" method="post">
-			<input type="hidden" name="id" id="id" value="${id }"/>
+			<table width="100%" border="0" align="center" cellpadding="0"
+				class="table_all_border" cellspacing="0" style="margin-bottom: 0px;border-bottom: 0px">
+				<tr>
+					<td class="td_table_top" align="center">
+						表单查看
+					</td>
+				</tr>
+			</table>
 			<table class="table_all" align="center" border="0" cellpadding="0"
-				cellspacing="0">
+				cellspacing="0" style="margin-top: 0px">
 				<tr>
 					<td class="td_table_1">
-						<span>表名称：</span>
+						<span>表单名称：</span>
 					</td>
-					<td class="td_table_2" colspan="3">
-						${dbtable.name }&nbsp;
+					<td class="td_table_2">
+						&nbsp;${form.name }
+					</td>
+					<td class="td_table_1">
+						<span>表单类别：</span>
+					</td>
+					<td class="td_table_2">
+						<frame:select name="type" type="select" configName="formType" cssClass="input_select" value="${form.type }" displayType="1"/>
 					</td>
 				</tr>
 				<tr>
@@ -28,7 +41,7 @@
 						<span>显示名称：</span>
 					</td>
 					<td class="td_table_2" colspan="3">
-						${dbtable.displayName }&nbsp;
+						&nbsp;${form.displayName }
 					</td>
 				</tr>
 			</table>

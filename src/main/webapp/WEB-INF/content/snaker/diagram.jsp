@@ -23,16 +23,15 @@
             $('#currentActorDIV').append(',' + returnValue);
         }
     }
-	function display(process, active) {
+	function display(process, state) {
 		/** view*/
 		$('#snakerflow').snakerflow($.extend(true,{
 			basePath : "${ctx}/styles/js/snaker/",
             ctxPath : "${ctx}",
             orderId : "${orderId}",
-			restore : eval("(" + process + ")")
-			,
+			restore : eval("(" + process + ")"),
 			editable : false
-			},eval("(" + active + ")")
+			},eval("(" + state + ")")
 		));
 	}
 </script>
@@ -54,7 +53,7 @@
 					return false;
 				},
 				success: function(data){
-					display(data.process, data.active);
+					display(data.process, data.state);
 				}
 			});
 		</script>

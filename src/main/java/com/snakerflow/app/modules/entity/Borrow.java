@@ -36,14 +36,12 @@ public class Borrow extends FlowEntity {
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-	@Column(name = "operateTime")
 	public String getOperateTime() {
 		return operateTime;
 	}
 	public void setOperateTime(String operateTime) {
 		this.operateTime = operateTime;
 	}
-	@Column(name = "repaymentDate")
 	public String getRepaymentDate() {
 		return repaymentDate;
 	}

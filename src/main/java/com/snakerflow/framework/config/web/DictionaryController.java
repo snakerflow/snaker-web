@@ -1,13 +1,13 @@
-package com.snakerflow.framework.dictionary.web;
+package com.snakerflow.framework.config.web;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.snakerflow.framework.dictionary.entity.Dictionary;
-import com.snakerflow.framework.dictionary.entity.DictionaryItem;
-import com.snakerflow.framework.dictionary.service.DictionaryManager;
+import com.snakerflow.framework.config.entity.Dictionary;
+import com.snakerflow.framework.config.entity.DictionaryItem;
+import com.snakerflow.framework.config.service.DictionaryManager;
 import com.snakerflow.framework.orm.Page;
 import com.snakerflow.framework.orm.PropertyFilter;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.snakerflow.framework.dictionary.entity;
+package com.snakerflow.framework.config.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,7 @@ public class Dictionary extends DictionaryEntity {
 	public void setDictionaryItems(List<DictionaryItem> dictionaryItems) {
 		this.dictionaryItems = dictionaryItems;
 	}
-	@Column(name = "cnName", nullable = false, length = 200)
+	@Column(name = "cn_name", nullable = false, length = 200)
 	public String getCnName() {
 		return cnName;
 	}

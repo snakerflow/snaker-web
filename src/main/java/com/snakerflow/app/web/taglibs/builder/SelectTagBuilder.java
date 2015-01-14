@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.snakerflow.framework.config.service.DictionaryManager;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.snakerflow.framework.dictionary.IDictionary;
 import com.snakerflow.framework.web.TagBuilder;
 import com.snakerflow.framework.web.TagDTO;
 import org.springframework.stereotype.Component;
@@ -113,9 +113,9 @@ public class SelectTagBuilder implements TagBuilder {
 				values.add(value);
 			}
 		}
-		IDictionary dictionary = springContext.getBean(IDictionary.class);
-		if(dictionary != null) {
-			items = dictionary.getByName(configName);
+		DictionaryManager dictionaryManager = springContext.getBean(DictionaryManager.class);
+		if(dictionaryManager != null) {
+			items = dictionaryManager.getByName(configName);
 		}
 	}
 	

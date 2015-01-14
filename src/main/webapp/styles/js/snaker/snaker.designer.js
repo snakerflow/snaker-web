@@ -57,6 +57,7 @@
 		},
 		historyRects:{
 			rects:[],
+            rectAttr:{stroke:"#00ff00","stroke-width":2},
 			pathAttr:{
 				path:{stroke:"#00ff00"},
 				arrow:{stroke:"#00ff00",fill:"#00ff00"}
@@ -1012,6 +1013,9 @@
         this.text=function(){
             return _text.attr("text")
         };
+        this.name=function() {
+            return _o.props["name"].value;
+        }
         this.attr=function(o){
             if(o&&o.path){
                 _path.attr(o.path)
@@ -1037,7 +1041,7 @@
 			_pdiv.show();
 			for(var l in props){
 				if(!props[l].name) continue;
-				if(props[l].name=="name"&&props[l].value==""){
+				if((props[l].name=="name"||props[l].name=="displayName")&&props[l].value==""){
 					props[l].value=src.getId()
 				}
 				props[l].value=props[l].value.replace(/#1/g,"'");
@@ -1156,6 +1160,7 @@
 					}
 				}
 				i+=">\n";
+                var tarray = new Array();
 				for(var node in _states){
 					if(_states[node]){
 						i+=_states[node].toBeforeXml();
@@ -1168,6 +1173,7 @@
 										alert("连接线名称不能为空");
 										return
 									}else{
+                                        tarray.push(_paths[transition].name());
 										i+="\n";
 										i+=transitionXml;
 									}
@@ -1180,7 +1186,13 @@
 					}
 				}
 				i+="</process>";
-				
+                var nary=tarray.sort();
+                for(var idx=0;idx<tarray.length;idx++){
+                    if (nary[idx]==nary[idx+1]){
+                        alert("连接线名称不能重复[" + nary[idx] + "]");
+                        return;
+                    }
+                }
 				designer.config.tools.save.onclick(i)
 			});
 			new designer.props({},_r)
@@ -1222,10 +1234,12 @@
 				if(!rmap[_paths[h].from().getName()]){
 					rmap[_paths[h].from().getName()]={rect:_paths[h].from(),paths:{}}
 				}
-				rmap[_paths[h].from().getName()].paths[_paths[h].text()]=_paths[h];
+
 				if(!rmap[_paths[h].to().getName()]){
 					rmap[_paths[h].to().getName()]={rect:_paths[h].to(),paths:{}}
 				}
+                rmap[_paths[h].from().getName()].paths[_paths[h].name()]=_paths[h];
+                //alert(_paths[h].from().getName() + "======>" + _paths[h].name());
 			}
 			for(var u=0;u<hr.rects.length;u++){
 				if(rmap[hr.rects[u].name]){

@@ -230,11 +230,11 @@ INSERT INTO sec_role_user (USER_ID, ROLE_ID) VALUES (1, 1);
 INSERT INTO sec_role_user (USER_ID, ROLE_ID) VALUES (2, 2);
 INSERT INTO sec_role_user (USER_ID, ROLE_ID) VALUES (3, 2);
 
-INSERT INTO conf_dictionary (ID, DESCRIPTION, NAME, CNNAME) VALUES (1, '', 'yesNo', '是否');
-INSERT INTO conf_dictionary (ID, DESCRIPTION, NAME, CNNAME) VALUES (2, '', 'sex', '性别');
-INSERT INTO conf_dictionary (ID, DESCRIPTION, NAME, CNNAME) VALUES (3, '', 'formType', '表单类型');
-INSERT INTO conf_dictionary (ID, DESCRIPTION, NAME, CNNAME) VALUES (4, '', 'fieldType', '字段类型');
-INSERT INTO conf_dictionary (ID, DESCRIPTION, NAME, CNNAME) VALUES (5, '', 'fieldDefault', '默认字段值');
+INSERT INTO conf_dictionary (ID, DESCRIPTION, NAME, CN_NAME) VALUES (1, '', 'yesNo', '是否');
+INSERT INTO conf_dictionary (ID, DESCRIPTION, NAME, CN_NAME) VALUES (2, '', 'sex', '性别');
+INSERT INTO conf_dictionary (ID, DESCRIPTION, NAME, CN_NAME) VALUES (3, '', 'formType', '表单类型');
+INSERT INTO conf_dictionary (ID, DESCRIPTION, NAME, CN_NAME) VALUES (4, '', 'fieldType', '字段类型');
+INSERT INTO conf_dictionary (ID, DESCRIPTION, NAME, CN_NAME) VALUES (5, '', 'fieldDefault', '默认字段值');
 
 INSERT INTO conf_dictitem (ID, DESCRIPTION, NAME, ORDERBY, DICTIONARY, CODE) VALUES (11, '', '是', 1, 1, '1');
 INSERT INTO conf_dictitem (ID, DESCRIPTION, NAME, ORDERBY, DICTIONARY, CODE) VALUES (12, '', '否', 2, 1, '2');

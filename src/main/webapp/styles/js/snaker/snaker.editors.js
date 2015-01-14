@@ -56,6 +56,31 @@ $.extend(true, snakerflow.editors, {
 				_props[_k].value = $(this).val();
 			});
 		};
+	},
+	assigneeEditor : function(arg){
+		var _props,_k,_div,_src,_r;
+		this.init = function(props, k, div, src, r){
+			_props=props; _k=k; _div=div; _src=src; _r=r;
+
+			$('<input style="width:88%;" readonly="true" id="dialogEditor"/>').val(props[_k].value).appendTo('#'+_div);
+			$('<input style="width:10%;" type="button" value="选择"/>').click(function(){
+				//alert("选择:" + snakerflow.config.ctxPath + arg);
+				var element = document.getElementById("dialogEditor");
+				var l  = window.showModalDialog(snakerflow.config.ctxPath + arg," ","dialogWidth:800px;dialogHeight:540px;center:yes;scrolling:yes");
+				if (l == null )
+					return;
+				var result = splitUsersAndAccounts(l);
+				element.title = result[1];
+				element.value = result[1];
+				props[_k].value = result[1];
+				props['assignee'].value = result[0];
+			}).appendTo('#'+_div);
+
+			$('#'+_div).data('editor', this);
+		}
+		this.destroy = function(){
+			//
+		}
 	}
 });
 

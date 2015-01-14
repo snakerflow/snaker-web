@@ -1,11 +1,14 @@
-package com.snakerflow.framework.dictionary.service;
+package com.snakerflow.framework.config.service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.hibernate.SQLQuery;
-import com.snakerflow.framework.dictionary.dao.DictionaryDao;
-import com.snakerflow.framework.dictionary.entity.Dictionary;
-import com.snakerflow.framework.dictionary.entity.DictionaryItem;
+import com.snakerflow.framework.config.dao.DictionaryDao;
+import com.snakerflow.framework.config.entity.Dictionary;
+import com.snakerflow.framework.config.entity.DictionaryItem;
 import com.snakerflow.framework.orm.Page;
 import com.snakerflow.framework.orm.PropertyFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,5 +96,20 @@ public class DictionaryManager {
 		SQLQuery query = dictionaryDao.createSQLQuery(sqlBuffer.toString(), name);
 		query.addEntity(DictionaryItem.class);
         return query.list();
+	}
+
+	/**
+	 * 根据字典名称，获取配置字典数据对象
+	 * @param name
+	 * @return Map<String, String> 选项主键ID、选项名称的字典映射集合
+	 */
+	public Map<String, String> getByName(String name) {
+		List<DictionaryItem> items = getItemsByName(name);
+		if(items == null || items.isEmpty()) return Collections.emptyMap();
+		Map<String, String> dicts = new TreeMap<String, String>();
+		for(DictionaryItem item : items) {
+			dicts.put(item.getCode(), item.getName());
+		}
+		return dicts;
 	}
 }

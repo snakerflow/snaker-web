@@ -36,6 +36,8 @@ function splitUsersAndAccounts( userNamesAndAccount )
 		userNames += temp[0] + ",";
 		accounts += temp[1] + ",";
 	}
+	userNames = userNames.substr(0, userNames.length - 1);
+	accounts = accounts.substr(0, accounts.length - 1);
 	var result = new Array(2);
 	result[0] = userNames;
 	result[1] = accounts;

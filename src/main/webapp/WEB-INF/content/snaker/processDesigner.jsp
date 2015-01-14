@@ -10,18 +10,16 @@
 		<script src="${ctx}/styles/js/raphael-min.js" type="text/javascript"></script>
 		<script src="${ctx}/styles/js/jquery-ui-1.8.4.custom/js/jquery.min.js" type="text/javascript"></script>
 		<script src="${ctx}/styles/js/jquery-ui-1.8.4.custom/js/jquery-ui.min.js" type="text/javascript"></script>
+		<script src="${ctx}/styles/js/snaker/dialog.js" type="text/javascript"></script>
 		<script src="${ctx}/styles/js/snaker/snaker.designer.js" type="text/javascript"></script>
 		<script src="${ctx}/styles/js/snaker/snaker.model.js" type="text/javascript"></script>
 		<script src="${ctx}/styles/js/snaker/snaker.editors.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			$(function() {
 				var json="${process }";
-				var model;
+				var model = "";
 				if(json) {
-					//json.replace(new RegExp("@@","gm"), "\"")
 					model=eval("(" + json + ")");
-				} else {
-					model="";
 				}
 				$('#snakerflow').snakerflow({
 					basePath : "${ctx}/styles/js/snaker/",

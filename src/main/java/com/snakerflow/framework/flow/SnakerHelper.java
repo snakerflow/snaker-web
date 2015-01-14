@@ -17,14 +17,13 @@
 package com.snakerflow.framework.flow;
 
 import java.beans.PropertyDescriptor;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.snakerflow.framework.flow.ext.ExtTaskModel;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
+import org.snaker.engine.entity.HistoryTask;
 import org.snaker.engine.entity.Task;
 import org.snaker.engine.model.CustomModel;
 import org.snaker.engine.model.DecisionModel;
@@ -46,7 +45,7 @@ import org.snaker.engine.model.TransitionModel;
 public class SnakerHelper {
 	private static Map<Class<? extends NodeModel>, String> mapper = new HashMap<Class<? extends NodeModel>, String>();
 	static {
-		mapper.put(TaskModel.class, "task");
+		mapper.put(ExtTaskModel.class, "task");
 		mapper.put(CustomModel.class, "custom");
 		mapper.put(DecisionModel.class, "decision");
 		mapper.put(EndModel.class, "end");
@@ -55,20 +54,31 @@ public class SnakerHelper {
 		mapper.put(StartModel.class, "start");
 		mapper.put(SubProcessModel.class, "subprocess");
 	}
-	public static String getActiveJson(List<Task> tasks) {
+	public static String getStateJson(ProcessModel model, List<Task> activeTasks, List<HistoryTask> historyTasks) {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{'activeRects':{'rects':[");
-		for(Task task : tasks) {
-			buffer.append("{'paths':[],'name':'");
-			buffer.append(task.getTaskName());
-			buffer.append("'},");
+		if(activeTasks != null && activeTasks.size() > 0) {
+			for(Task task : activeTasks) {
+				buffer.append("{'paths':[],'name':'");
+				buffer.append(task.getTaskName());
+				buffer.append("'},");
+			}
+			buffer.deleteCharAt(buffer.length() - 1);
 		}
-		buffer.deleteCharAt(buffer.length() - 1);
+		buffer.append("]}, 'historyRects':{'rects':[");
+		if(historyTasks != null && historyTasks.size() > 0) {
+			for(HistoryTask historyTask : historyTasks) {
+				NodeModel parentModel = model.getNode(historyTask.getTaskName());
+				if(parentModel == null) continue;
+				buffer.append("{'name':'").append(parentModel.getName()).append("','paths':[");
+				buffer.append("]},");
+			}
+			buffer.deleteCharAt(buffer.length() - 1);
+		}
 		buffer.append("]}}");
-		buffer.append("");
-		buffer.append("");
 		return buffer.toString();
 	}
+
 	public static String getModelJson(ProcessModel model) {
 		StringBuffer buffer = new StringBuffer();
 		List<TransitionModel> tms = new ArrayList<TransitionModel>();

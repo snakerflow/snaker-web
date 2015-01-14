@@ -152,7 +152,7 @@ public class FlowController {
         }
         String ccOperator = request.getParameter(PARA_CCOPERATOR);
         if(StringUtils.isNotEmpty(ccOperator)) {
-            facets.getEngine().order().createCCOrder(orderId, ccOperator.split(","));
+            facets.getEngine().order().createCCOrder(orderId, ShiroUtils.getUsername(), ccOperator.split(","));
         }
         return "redirect:/snaker/task/active";
     }

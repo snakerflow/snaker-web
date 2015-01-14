@@ -1,5 +1,5 @@
 CREATE TABLE wf_process (
-    id                VARCHAR(100) PRIMARY KEY NOT NULL comment '主键ID',
+    id                VARCHAR(32) PRIMARY KEY NOT NULL comment '主键ID',
     name              VARCHAR(100) comment '流程名称',
     display_Name      VARCHAR(200) comment '流程显示名称',
     type              VARCHAR(100) comment '流程类型',
@@ -12,9 +12,9 @@ CREATE TABLE wf_process (
 )comment='流程定义表';
 
 CREATE TABLE wf_order (
-    id                VARCHAR(100) NOT NULL PRIMARY KEY comment '主键ID',
-    parent_Id         VARCHAR(100) comment '父流程ID',
-    process_Id        VARCHAR(100) NOT NULL comment '流程定义ID',
+    id                VARCHAR(32) NOT NULL PRIMARY KEY comment '主键ID',
+    parent_Id         VARCHAR(32) comment '父流程ID',
+    process_Id        VARCHAR(32) NOT NULL comment '流程定义ID',
     creator           VARCHAR(100) comment '发起人',
     create_Time       VARCHAR(50) NOT NULL comment '发起时间',
     expire_Time       VARCHAR(50) comment '期望完成时间',
@@ -28,8 +28,8 @@ CREATE TABLE wf_order (
 )comment='流程实例表';
 
 CREATE TABLE wf_task (
-    id                VARCHAR(100) NOT NULL PRIMARY KEY comment '主键ID',
-    order_Id          VARCHAR(100) NOT NULL comment '流程实例ID',
+    id                VARCHAR(32) NOT NULL PRIMARY KEY comment '主键ID',
+    order_Id          VARCHAR(32) NOT NULL comment '流程实例ID',
     task_Name         VARCHAR(100) NOT NULL comment '任务名称',
     display_Name      VARCHAR(200) NOT NULL comment '任务显示名称',
     task_Type         TINYINT(1) NOT NULL comment '任务类型',
@@ -45,27 +45,27 @@ CREATE TABLE wf_task (
 )comment='任务表';
 
 CREATE TABLE wf_task_actor (
-    task_Id           VARCHAR(100) not null comment '任务ID',
+    task_Id           VARCHAR(32) not null comment '任务ID',
     actor_Id          VARCHAR(100) not null comment '参与者ID'
 )comment='任务参与者表';
 
 create table wf_hist_order (
-    id                VARCHAR(100) not null primary key comment '主键ID',
-    process_Id        VARCHAR(100) not null comment '流程定义ID',
+    id                VARCHAR(32) not null primary key comment '主键ID',
+    process_Id        VARCHAR(32) not null comment '流程定义ID',
     order_State       TINYINT(1) not null comment '状态',
     creator           VARCHAR(100) comment '发起人',
     create_Time       VARCHAR(50) not null comment '发起时间',
     end_Time          VARCHAR(50) comment '完成时间',
     expire_Time       VARCHAR(50) comment '期望完成时间',
     priority          TINYINT(1) comment '优先级',
-    parent_Id         VARCHAR(100) comment '父流程ID',
+    parent_Id         VARCHAR(32) comment '父流程ID',
     order_No          VARCHAR(100) comment '流程实例编号',
     variable          VARCHAR(2000) comment '附属变量json存储'
 )comment='历史流程实例表';
 
 create table wf_hist_task (
-    id                VARCHAR(100) not null primary key comment '主键ID',
-    order_Id          VARCHAR(100) not null comment '流程实例ID',
+    id                VARCHAR(32) not null primary key comment '主键ID',
+    order_Id          VARCHAR(32) not null comment '流程实例ID',
     task_Name         VARCHAR(100) not null comment '任务名称',
     display_Name      VARCHAR(200) not null comment '任务显示名称',
     task_Type         TINYINT(1) not null comment '任务类型',
@@ -76,12 +76,12 @@ create table wf_hist_task (
     finish_Time       VARCHAR(50) comment '任务完成时间',
     expire_Time       VARCHAR(50) comment '任务期望完成时间',
     action_Url        VARCHAR(200) comment '任务处理url',
-    parent_Task_Id    VARCHAR(100) comment '父任务ID',
+    parent_Task_Id    VARCHAR(32) comment '父任务ID',
     variable          VARCHAR(2000) comment '附属变量json存储'
 )comment='历史任务表';
 
 create table wf_hist_task_actor (
-    task_Id           VARCHAR(100) not null comment '任务ID',
+    task_Id           VARCHAR(32) not null comment '任务ID',
     actor_Id          VARCHAR(100) not null comment '参与者ID'
 )comment='历史任务参与者表';
 
@@ -98,9 +98,10 @@ create table wf_surrogate (
 create index IDX_SURROGATE_OPERATOR on wf_surrogate (operator);
 
 create table wf_cc_order (
-    order_Id        varchar(100) COMMENT '流程实例ID',
+    order_Id        varchar(32) COMMENT '流程实例ID',
     actor_Id        varchar(100) COMMENT '参与者ID',
     status          TINYINT(1)  COMMENT '状态',
+    creator         varchar(50) COMMENT '发起人',
     create_Time      varchar(50) comment '创建时间',
     finish_Time      varchar(50) comment '完成时间'
 )comment='抄送实例表';
@@ -236,7 +237,7 @@ ALTER TABLE SEC_USER_AUTHORITY ADD CONSTRAINT FK_USER_AUTHORITY2 FOREIGN KEY (US
 
 CREATE TABLE conf_dictionary (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  cnName VARCHAR(200) NOT NULL,
+  cn_name VARCHAR(200) NOT NULL,
   description VARCHAR(500) DEFAULT NULL,
   name VARCHAR(200) NOT NULL
 );
@@ -256,13 +257,13 @@ ALTER TABLE CONF_DICTITEM ADD CONSTRAINT FK_DICTITEM_DICTIONARY FOREIGN KEY (DIC
 CREATE TABLE df_form (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(200) NOT NULL,
-  displayName VARCHAR(200) DEFAULT NULL,
+  display_name VARCHAR(200) DEFAULT NULL,
   type VARCHAR(50) DEFAULT NULL,
   creator VARCHAR(50) DEFAULT NULL,
-  createTime VARCHAR(50) DEFAULT NULL,
-  originalHtml TEXT,
-  parseHtml TEXT,
-  fieldNum INT DEFAULT 0
+  create_time VARCHAR(50) DEFAULT NULL,
+  original_html TEXT,
+  parse_html TEXT,
+  field_num INT DEFAULT 0
 );
 ALTER TABLE DF_FORM ADD UNIQUE (NAME);
 
@@ -273,19 +274,19 @@ CREATE TABLE df_field (
   title VARCHAR(50) DEFAULT NULL,
   type  VARCHAR(50) DEFAULT NULL,
   flow  VARCHAR(10) DEFAULT NULL,
-  tableName VARCHAR(50) DEFAULT NULL,
-  formId INT NOT NULL
+  table_name VARCHAR(50) DEFAULT NULL,
+  form_id INT NOT NULL
 );
 
 CREATE TABLE flow_approval (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   operator VARCHAR(50) NOT NULL,
-  operateTime VARCHAR(50),
+  operate_time VARCHAR(50),
   result VARCHAR(50),
   description VARCHAR(500) DEFAULT NULL,
-  orderId VARCHAR(50),
-  taskId VARCHAR(50),
-  taskName VARCHAR(100)
+  order_id VARCHAR(50),
+  task_id VARCHAR(50),
+  task_name VARCHAR(100)
 );
 
 CREATE TABLE flow_borrow (
@@ -293,7 +294,7 @@ CREATE TABLE flow_borrow (
   operator VARCHAR(50) NOT NULL,
   description VARCHAR(500) DEFAULT NULL,
   amount DOUBLE,
-  operateTime VARCHAR(50),
-  repaymentDate VARCHAR(50),
-  orderId VARCHAR(50)
+  operate_time VARCHAR(50),
+  repayment_date VARCHAR(50),
+  order_id VARCHAR(50)
 );
